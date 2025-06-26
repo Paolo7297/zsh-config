@@ -10,3 +10,6 @@ if type eza &> /dev/null; then
   alias tree='eza --tree'
   alias ltr=tree
 fi
+
+# open
+alias open='xdg-open'
