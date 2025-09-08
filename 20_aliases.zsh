@@ -12,4 +12,6 @@ if type eza &> /dev/null; then
 fi
 
 # open
-alias open='xdg-open'
+if type xdg-open &> /dev/null; then
+  alias open='xdg-open'
+fi
