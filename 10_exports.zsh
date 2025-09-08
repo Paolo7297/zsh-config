@@ -10,3 +10,10 @@ fi
 
 # Amazon AWS SAM
 export SAM_CLI_TELEMETRY=0
+
+# UV Tools
+if [[ -e "$HOME/.local/bin" ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
+export EDITOR=nano
