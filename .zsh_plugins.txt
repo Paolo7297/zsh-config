@@ -18,7 +18,6 @@ zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting kind:defer
 
 MichaelAquilina/zsh-you-should-use
-fdellwing/zsh-bat
 
 Aloxaf/fzf-tab
 joshskidmore/zsh-fzf-history-search

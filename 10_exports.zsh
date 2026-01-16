@@ -17,3 +17,16 @@ if [[ -e "$HOME/.local/bin" ]]; then
 fi
 
 export EDITOR=nano
+
+if [[ -e "/usr/share/nvm/init-nvm.sh" ]]; then
+  source /usr/share/nvm/init-nvm.sh
+fi
+
+if [[ -e "$HOME/Android/Sdk/" ]]; then
+  export ANDROID_HOME="$HOME/Android/Sdk/"
+fi
+
+if [[ -e "/usr/lib/jvm/java-21-amazon-corretto" ]]; then
+  export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto
+  export PATH="$JAVA_HOME/bin:$PATH"
+fi
