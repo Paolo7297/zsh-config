@@ -2,5 +2,6 @@
 
 .zsh_plugins.zsh
 .zsh_history
+.zsh_sessions
 
 50_tokens.zsh

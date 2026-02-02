@@ -1,6 +1,8 @@
 # JetBrains apps
 if [[ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]]; then
   export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+elif [[ -d "$HOME/Library/Application Support/JetBrains/Toolbox/scripts/" ]]; then
+  export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts/"
 fi
 
 # Bitwarden SSH agent
@@ -20,13 +22,17 @@ export EDITOR=nano
 
 if [[ -e "/usr/share/nvm/init-nvm.sh" ]]; then
   source /usr/share/nvm/init-nvm.sh
+else
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 fi
 
 if [[ -e "$HOME/Android/Sdk/" ]]; then
   export ANDROID_HOME="$HOME/Android/Sdk/"
 fi
 
-if [[ -e "/usr/lib/jvm/java-21-amazon-corretto" ]]; then
-  export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto
-  export PATH="$JAVA_HOME/bin:$PATH"
+if [[ -e "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+  export HOMEBREW_NO_ANALYTICS=1
 fi
