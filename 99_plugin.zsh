@@ -10,3 +10,6 @@ fi
 
 # Show autosuggestions with OneHalfDark theme
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
+
+# iTerm2 shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
