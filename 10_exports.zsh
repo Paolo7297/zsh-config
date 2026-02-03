@@ -32,6 +32,10 @@ if [[ -e "$HOME/Android/Sdk/" ]]; then
   export ANDROID_HOME="$HOME/Android/Sdk/"
 fi
 
+if [[ -e "$HOME/.antigravity/antigravity/bin/" ]]; then
+  export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+fi
+
 if [[ -e "/opt/homebrew/bin/brew" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv zsh)"
   export HOMEBREW_NO_ANALYTICS=1
