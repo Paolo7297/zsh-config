@@ -14,11 +14,9 @@ ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/aws
 
 romkatv/powerlevel10k
+Aloxaf/fzf-tab
 
 zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting kind:defer
-
 MichaelAquilina/zsh-you-should-use
-
-Aloxaf/fzf-tab
 joshskidmore/zsh-fzf-history-search
