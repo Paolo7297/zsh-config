@@ -45,3 +45,8 @@ fi
 if [[ $(uname -m) == "arm64" ]]; then
   export DOCKER_DEFAULT_PLATFORM=linux/amd64
 fi
+
+if [[ -e "$HOME/.bun" ]]; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
