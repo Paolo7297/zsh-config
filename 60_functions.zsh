@@ -43,5 +43,5 @@ function upd {
 
   config-update
 
-  antidote-update -b
+  antidote update -b
 }
