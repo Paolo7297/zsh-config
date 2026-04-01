@@ -1,20 +1,15 @@
 function config-update {
   OLDDIR=$(pwd)
 
-  local green blue normal
-	if __antidote_supports_color
-	then
-		if (( $+commands[tput] ))
-		then
-			green=$(tput setaf 2)
-			blue=$(tput setaf 4)
-			normal=$(tput sgr0)
-		else
-			green=$'\E[32m'
-			blue=$'\E[34m'
-			normal=$'\E[0m'
-		fi
-	fi
+  local green normal
+  if (( $+commands[tput] ))
+  then
+    green=$(tput setaf 2)
+    normal=$(tput sgr0)
+  else
+    green=$'\E[32m'
+    normal=$'\E[0m'
+  fi
 
   cd "$ZDOTDIR"
   git pull
