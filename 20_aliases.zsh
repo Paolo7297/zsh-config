@@ -17,3 +17,7 @@ if type xdg-open &> /dev/null; then
 fi
 
 alias path='tr ":" "\n" <<< "$PATH"'
+
+if type tofu &> /dev/null; then
+  alias terraform=tofu
+fi
