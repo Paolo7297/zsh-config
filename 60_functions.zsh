@@ -33,7 +33,7 @@ function upd {
 	fi
 
 	if type brew &> /dev/null; then
-		brew update && brew upgrade && brew upgrade --cask && brew cleanup
+		brew update && brew upgrade -y && brew cleanup
 	fi
 
   config-update
