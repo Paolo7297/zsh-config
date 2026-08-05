@@ -9,7 +9,7 @@ romkatv/zsh-defer
 getantidote/use-omz
 ohmyzsh/ohmyzsh path:lib
 ohmyzsh/ohmyzsh path:plugins/gnu-utils
-ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/git kind:defer  # forks `git version` on load
 ohmyzsh/ohmyzsh path:plugins/docker
 ohmyzsh/ohmyzsh path:plugins/docker-compose
 ohmyzsh/ohmyzsh path:plugins/sudo
@@ -21,5 +21,4 @@ Aloxaf/fzf-tab
 
 zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting kind:defer
-MichaelAquilina/zsh-you-should-use
-joshskidmore/zsh-fzf-history-search
+MichaelAquilina/zsh-you-should-use kind:defer  # forks tput 4x on load

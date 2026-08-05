@@ -10,15 +10,10 @@ if [[ -e "$HOME/.bitwarden-ssh-agent.sock" ]]; then
   export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
 fi
 
-# Amazon AWS SAM
-export SAM_CLI_TELEMETRY=0
-
 # UV Tools
 if [[ -e "$HOME/.local/bin" ]]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
-
-export EDITOR=nano
 
 # nvm costs ~400ms, so load it right after the first prompt instead of before it
 if [[ -e "/usr/share/nvm/init-nvm.sh" ]]; then
@@ -43,11 +38,13 @@ if [[ -e "/opt/homebrew/bin/brew" ]]; then
   export HOMEBREW_NO_ENV_HINTS=1
 fi
 
-if [[ $(uname -m) == "arm64" ]]; then
-  export DOCKER_DEFAULT_PLATFORM=linux/amd64
-fi
-
 if [[ -e "$HOME/.bun" ]]; then
   export BUN_INSTALL="$HOME/.bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+# VCPkg
+if [[ -d "$HOME/.vcpkg" ]]; then
+  export VCPKG_ROOT="$HOME/.vcpkg"
+  export PATH=$VCPKG_ROOT:$PATH
 fi

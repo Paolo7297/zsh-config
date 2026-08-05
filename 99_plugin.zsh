@@ -1,15 +1,15 @@
 # Zoxide (z pathname)
-if type zoxide &> /dev/null; then
-  eval "$(zoxide init zsh)"
+if (( $+commands[zoxide] )); then
+  zsh-defer -c 'eval "$(zoxide init zsh)"'
 fi
 
-# Terraform
-if [[ -e "/usr/bin/terraform" ]]; then
-  complete -C /usr/bin/terraform terraform
+# fzf: ^T insert file, Alt-C fuzzy cd, ^R history, plus `**<TAB>` path completion.
+if (( $+commands[fzf] )); then
+  zsh-defer -c 'source <(fzf --zsh)'
 fi
 
 # Show autosuggestions with OneHalfDark theme
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 
 # iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
