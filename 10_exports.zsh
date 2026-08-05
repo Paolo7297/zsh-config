@@ -20,12 +20,13 @@ fi
 
 export EDITOR=nano
 
+# nvm costs ~400ms, so load it right after the first prompt instead of before it
 if [[ -e "/usr/share/nvm/init-nvm.sh" ]]; then
-  source /usr/share/nvm/init-nvm.sh
+  zsh-defer source /usr/share/nvm/init-nvm.sh
 else
   export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && zsh-defer source "/opt/homebrew/opt/nvm/nvm.sh"
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && zsh-defer source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 fi
 
 if [[ -e "$HOME/Android/Sdk/" ]]; then
