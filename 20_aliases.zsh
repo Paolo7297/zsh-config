@@ -3,21 +3,21 @@ alias ll='ls -l'
 alias la='ls -la'
 alias l=ll
 
-# exa
-if type eza &> /dev/null; then
+# eza
+if (( $+commands[eza] )); then
   alias exa=eza
-  alias ls='eza --git --group-directories-first'
+  alias ls='eza --git --group-directories-first --icons'
   alias tree='eza --tree'
   alias ltr=tree
 fi
 
-# open
-if type xdg-open &> /dev/null; then
+# open if macos
+if (( $+commands[xdg-open] )); then
   alias open='xdg-open'
 fi
 
 alias path='tr ":" "\n" <<< "$PATH"'
 
-if type tofu &> /dev/null; then
+if (( $+commands[tofu] )); then
   alias terraform=tofu
 fi
