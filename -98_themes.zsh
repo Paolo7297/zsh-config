@@ -66,6 +66,7 @@ esac
 typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
 typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 # discard `p10k configure` output instead of letting it overwrite this file
 typeset -g POWERLEVEL9K_CONFIG_FILE=/dev/null
 unset _p10k_config
