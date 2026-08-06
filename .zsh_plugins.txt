@@ -13,6 +13,8 @@ ohmyzsh/ohmyzsh path:plugins/git kind:defer  # forks `git version` on load
 ohmyzsh/ohmyzsh path:plugins/docker
 ohmyzsh/ohmyzsh path:plugins/docker-compose
 ohmyzsh/ohmyzsh path:plugins/sudo
+# not deferred: installs chpwd/zshaddhistory/precmd hooks, needs them from cmd 1
+ohmyzsh/ohmyzsh path:plugins/per-directory-history
 ohmyzsh/ohmyzsh path:plugins/aws kind:defer   # forks `aws configure get region` on load
 ohmyzsh/ohmyzsh path:plugins/terraform
 

@@ -6,8 +6,8 @@ minimal)
   source $_p10k_config/p10k-pure.zsh
 
   # ------------------ customizations on top of upstream pure ------------------
-  # snazzy colors, 24h time on the right, compact, transient_prompt.
-  typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time newline)
+  # snazzy colors, 24h time on the right, compact, transient_prompt, per_directory_history in prompt
+  typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(per_directory_history time newline)
   typeset -g POWERLEVEL9K_DIR_FOREGROUND='#57C7FF'
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='#F3F99D'
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%F{#F1F1F0}%n%f%F{242}@%m%f'
@@ -61,6 +61,15 @@ minimal)
   typeset -g POWERLEVEL9K_BATTERY_STAGES='\UF008E\UF007A\UF007B\UF007C\UF007D\UF007E\UF007F\UF0080\UF0081\UF0082\UF0079'
   ;;
 esac
+
+# per-directory-history slopped functions to refresh prompt when using ^G + colors.
+_pdh_col='${${${_per_directory_history_is_global:-false}/true/130}/false/135}'
+_pdh_txt='${${${_per_directory_history_is_global:-false}/true/global}/false/local}'
+typeset -g POWERLEVEL9K_PER_DIRECTORY_HISTORY_{LOCAL,GLOBAL}_CONTENT_EXPANSION='%F{'$_pdh_col'}'$_pdh_txt
+typeset -g POWERLEVEL9K_PER_DIRECTORY_HISTORY_{LOCAL,GLOBAL}_VISUAL_IDENTIFIER_EXPANSION='%F{'$_pdh_col'}${P9K_VISUAL_IDENTIFIER}'
+unset _pdh_col _pdh_txt
+typeset -g POWERLEVEL9K_PER_DIRECTORY_HISTORY_LOCAL_FOREGROUND=135
+typeset -g POWERLEVEL9K_PER_DIRECTORY_HISTORY_GLOBAL_FOREGROUND=130
 
 # shared by both themes: compact, transient prompt, quiet instant prompt
 typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
