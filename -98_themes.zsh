@@ -55,7 +55,65 @@ minimal)
 
   # aws segment: always shown, profile only (no region)
   unset POWERLEVEL9K_AWS_SHOW_ON_COMMAND
-  typeset -g POWERLEVEL9K_AWS_CONTENT_EXPANSION='${P9K_AWS_PROFILE//\%/%%}'
+  typeset -g POWERLEVEL9K_AWS_CONTENT_EXPANSION='${_aws_login_icon} %F{${POWERLEVEL9K_AWS_DEFAULT_FOREGROUND}}${P9K_AWS_PROFILE//\%/%%}'
+
+  _aws_login_init() {
+    typeset -gA _aws_login_files
+    local cfg=${AWS_CONFIG_FILE:-$HOME/.aws/config} line profile key val arn
+    local -A login src hash
+    [[ -r $cfg ]] || return
+    for line in "${(@f)$(<$cfg)}"; do
+      if [[ $line == \[*\]* ]]; then
+        profile=${${${line#\[}%%\]*}#profile }
+      elif [[ $line == *=* ]]; then
+        key=${${line%%=*}//[[:space:]]/}
+        val=${${line#*=}//[[:space:]]/}
+        case $key in
+          login_session) login[$profile]=$val ;;
+          source_profile) src[$profile]=$val ;;
+        esac
+      fi
+    done
+    for profile in ${(k)login} ${(k)src}; do
+      arn=${login[$profile]}
+      [[ -z $arn && -n ${src[$profile]} ]] && arn=${login[${src[$profile]}]}
+      [[ -n $arn ]] || continue
+      [[ -n ${hash[$arn]} ]] || hash[$arn]=${"$(print -rn -- $arn | shasum -a 256)"%% *}
+      _aws_login_files[$profile]=$HOME/.aws/login/cache/${hash[$arn]}.json
+    done
+    _aws_login_status
+  }
+
+  zmodload zsh/datetime
+  zmodload -F zsh/stat b:zstat
+  _aws_login_status() {
+    setopt localoptions extendedglob
+    if (( ! ${+_aws_login_files} )); then
+      typeset -gA _aws_login_files
+      if (( ${+functions[zsh-defer]} )); then
+        zsh-defer _aws_login_init
+      else
+        _aws_login_init
+      fi
+    fi
+    local TZ=UTC f=${_aws_login_files[${AWS_PROFILE:-$AWS_DEFAULT_PROFILE}]} exp
+    local -a mtime
+    typeset -g _aws_login_icon='%F{red}✗'
+    [[ -n $f ]] && zstat -A mtime +mtime -- $f 2>/dev/null || return
+    if [[ ${f}:${mtime} != "$_aws_login_seen" ]]; then
+      typeset -g _aws_login_seen=${f}:${mtime} _aws_login_exp=
+      exp=${${"$(<$f)"#*\"expiresAt\"[[:space:]]#:[[:space:]]#\"}%%\"*}
+      strftime -rs exp '%Y-%m-%dT%H:%M:%SZ' $exp 2>/dev/null && _aws_login_exp=$exp
+    fi
+    [[ -n $_aws_login_exp ]] || return
+    if (( _aws_login_exp > EPOCHSECONDS )); then
+      _aws_login_icon='%F{green}✓'
+    else
+      _aws_login_icon='%F{yellow}?'
+    fi
+  }
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _aws_login_status
 
   unset POWERLEVEL9K_BATTERY_STAGES  # upstream declares it as an array
   typeset -g POWERLEVEL9K_BATTERY_STAGES='\UF008E\UF007A\UF007B\UF007C\UF007D\UF007E\UF007F\UF0080\UF0081\UF0082\UF0079'
