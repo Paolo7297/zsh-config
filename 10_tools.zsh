@@ -48,3 +48,7 @@ if [[ -d "$HOME/.vcpkg" ]]; then
   export VCPKG_ROOT="$HOME/.vcpkg"
   export PATH=$VCPKG_ROOT:$PATH
 fi
+
+if [[ -f "$HOME/.docker/run/docker.sock" ]]; then
+  export DOCKER_HOST=unix://$HOME/.docker/run/docker.sock
+fi
