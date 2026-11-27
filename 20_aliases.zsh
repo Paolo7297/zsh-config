@@ -21,3 +21,7 @@ alias path='tr ":" "\n" <<< "$PATH"'
 if (( $+commands[tofu] )); then
   alias terraform=tofu
 fi
+
+if (( $+commands[aws] )); then
+  alias awsl='aws login ${AWS_LOGIN_PROFILE:+--profile=$AWS_LOGIN_PROFILE}'
+fi
