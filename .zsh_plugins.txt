@@ -15,10 +15,15 @@ ohmyzsh/ohmyzsh path:plugins/docker-compose
 ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/aws kind:defer   # forks `aws configure get region` on load
 ohmyzsh/ohmyzsh path:plugins/terraform
+ohmyzsh/ohmyzsh path:plugins/extract kind:defer
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages kind:defer
 
 romkatv/powerlevel10k
 Aloxaf/fzf-tab
 
+wfxr/forgit kind:defer
+hlissner/zsh-autopair kind:defer
+
 zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting kind:defer
-MichaelAquilina/zsh-you-should-use kind:defer  # forks tput 4x on load
+MichaelAquilina/zsh-you-should-use kind:defer
