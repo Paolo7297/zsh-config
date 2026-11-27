@@ -12,4 +12,4 @@ fi
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 
 # iTerm2 shell integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+[[ $TERM_PROGRAM == iTerm.app && -e "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"

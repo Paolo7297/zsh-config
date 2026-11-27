@@ -1,22 +1,5 @@
 function config-update {
-  OLDDIR=$(pwd)
-
-  local green normal
-  if (( $+commands[tput] ))
-  then
-    green=$(tput setaf 2)
-    normal=$(tput sgr0)
-  else
-    green=$'\E[32m'
-    normal=$'\E[0m'
-  fi
-
-  cd "$ZDOTDIR"
-  git pull
-  cd "$OLDDIR"
-
-  print "${green}Configuration updates complete.${normal}"
-  print ""
+  git -C "$ZDOTDIR" pull --recurse-submodules && print -P '%F{green}Configuration updates complete.%f\n'
 }
 
 function upd {
